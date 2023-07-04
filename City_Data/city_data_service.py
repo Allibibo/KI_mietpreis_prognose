@@ -1,13 +1,19 @@
 import json
 
-with open('./city_data.json', 'r') as f:
+with open('/Users/alexander/PycharmProjects/KI_mietpreis_prognose/City_Data/city_data.json', 'r') as f:
     city_data_list = json.load(f)
+
+with open('/Users/alexander/PycharmProjects/KI_mietpreis_prognose/City_Data/city_population_data.json', 'r') as a:
+    city_population_data_list = json.load(a)
+
+with open('City_Data/city_base_data.json', 'r') as b:
+    city_base_data_list = json.load(b)
 
 
 def _get_city_dir(name):
     city = None
-    for city_data in city_data_list:
-        if city_data["city"] == name:
+    for city_data in city_population_data_list:
+        if city_data["Name"] == name:
             city = city_data
 
     return city
@@ -17,6 +23,7 @@ def _get_all_city_names():
     city_name_list = []
     for city_data in city_data_list:
         city_name_list.append(city_data["city"])
+    return city_name_list
 
 
 def get_nearest_city(location_lat, location_lng):
@@ -71,3 +78,7 @@ def get_average_rating(city_data, year):
     return round(rating_sum / num_of_rating)
 
 
+def test():
+    pass
+    #with open('City_Data/city_population_data.json', 'w', encoding='utf-8') as d:
+    #    json.dump(res, d, ensure_ascii=False, indent=4)

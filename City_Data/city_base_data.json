@@ -1,0 +1,488 @@
+[
+    {
+        "id": 0,
+        "name": "Berlin",
+        "lat": 52.52,
+        "lng": 13.405
+    },
+    {
+        "id": 1,
+        "name": "Stuttgart",
+        "lat": 48.7775,
+        "lng": 9.18
+    },
+    {
+        "id": 2,
+        "name": "München",
+        "lat": 48.1375,
+        "lng": 11.575
+    },
+    {
+        "id": 3,
+        "name": "Hamburg",
+        "lat": 53.55,
+        "lng": 10
+    },
+    {
+        "id": 4,
+        "name": "Köln",
+        "lat": 50.9364,
+        "lng": 6.9528
+    },
+    {
+        "id": 5,
+        "name": "Frankfurt am Main",
+        "lat": 50.1106,
+        "lng": 8.6822
+    },
+    {
+        "id": 6,
+        "name": "Düsseldorf",
+        "lat": 51.2333,
+        "lng": 6.7833
+    },
+    {
+        "id": 7,
+        "name": "Leipzig",
+        "lat": 51.34,
+        "lng": 12.375
+    },
+    {
+        "id": 8,
+        "name": "Dortmund",
+        "lat": 51.5167,
+        "lng": 7.4667
+    },
+    {
+        "id": 9,
+        "name": "Essen",
+        "lat": 51.4508,
+        "lng": 7.0131
+    },
+    {
+        "id": 10,
+        "name": "Bremen",
+        "lat": 53.0833,
+        "lng": 8.8
+    },
+    {
+        "id": 11,
+        "name": "Dresden",
+        "lat": 51.05,
+        "lng": 13.74
+    },
+    {
+        "id": 12,
+        "name": "Hannover",
+        "lat": 52.3667,
+        "lng": 9.7167
+    },
+    {
+        "id": 13,
+        "name": "Nürnberg",
+        "lat": 49.4539,
+        "lng": 11.0775
+    },
+    {
+        "id": 14,
+        "name": "Duisburg",
+        "lat": 51.4347,
+        "lng": 6.7625
+    },
+    {
+        "id": 15,
+        "name": "Bochum",
+        "lat": 51.4819,
+        "lng": 7.2158
+    },
+    {
+        "id": 16,
+        "name": "Wuppertal",
+        "lat": 51.2667,
+        "lng": 7.1833
+    },
+    {
+        "id": 17,
+        "name": "Bielefeld",
+        "lat": 52.0211,
+        "lng": 8.5347
+    },
+    {
+        "id": 18,
+        "name": "Bonn",
+        "lat": 50.7333,
+        "lng": 7.1
+    },
+    {
+        "id": 19,
+        "name": "Münster",
+        "lat": 51.9625,
+        "lng": 7.6256
+    },
+    {
+        "id": 20,
+        "name": "Mannheim",
+        "lat": 49.4878,
+        "lng": 8.4661
+    },
+    {
+        "id": 21,
+        "name": "Karlsruhe",
+        "lat": 49.0092,
+        "lng": 8.404
+    },
+    {
+        "id": 22,
+        "name": "Augsburg",
+        "lat": 48.3689,
+        "lng": 10.8978
+    },
+    {
+        "id": 23,
+        "name": "Wiesbaden",
+        "lat": 50.0825,
+        "lng": 8.24
+    },
+    {
+        "id": 24,
+        "name": "Mönchen_gladbach",
+        "lat": 51.2,
+        "lng": 6.4333
+    },
+    {
+        "id": 25,
+        "name": "Gelsenkirchen",
+        "lat": 51.5167,
+        "lng": 7.1
+    },
+    {
+        "id": 26,
+        "name": "Aachen",
+        "lat": 50.7756,
+        "lng": 6.0836
+    },
+    {
+        "id": 27,
+        "name": "Braunschweig",
+        "lat": 52.2667,
+        "lng": 10.5167
+    },
+    {
+        "id": 28,
+        "name": "Chemnitz",
+        "lat": 50.8333,
+        "lng": 12.9167
+    },
+    {
+        "id": 29,
+        "name": "Kiel",
+        "lat": 54.3233,
+        "lng": 10.1394
+    },
+    {
+        "id": 30,
+        "name": "Halle",
+        "lat": 51.4828,
+        "lng": 11.9697
+    },
+    {
+        "id": 31,
+        "name": "Magdeburg",
+        "lat": 52.1317,
+        "lng": 11.6392
+    },
+    {
+        "id": 32,
+        "name": "Freiburg im Breisgau",
+        "lat": 47.995,
+        "lng": 7.85
+    },
+    {
+        "id": 33,
+        "name": "Krefeld",
+        "lat": 51.3333,
+        "lng": 6.5667
+    },
+    {
+        "id": 34,
+        "name": "Mainz",
+        "lat": 49.9833,
+        "lng": 8.2667
+    },
+    {
+        "id": 35,
+        "name": "Lübeck",
+        "lat": 53.8697,
+        "lng": 10.6864
+    },
+    {
+        "id": 36,
+        "name": "Erfurt",
+        "lat": 50.9833,
+        "lng": 11.0333
+    },
+    {
+        "id": 37,
+        "name": "Oberhausen",
+        "lat": 51.4967,
+        "lng": 6.8706
+    },
+    {
+        "id": 38,
+        "name": "Rostock",
+        "lat": 54.0833,
+        "lng": 12.1333
+    },
+    {
+        "id": 39,
+        "name": "Kassel",
+        "lat": 51.3158,
+        "lng": 9.4979
+    },
+    {
+        "id": 40,
+        "name": "Hagen",
+        "lat": 51.3667,
+        "lng": 7.4833
+    },
+    {
+        "id": 41,
+        "name": "Potsdam",
+        "lat": 52.4,
+        "lng": 13.0667
+    },
+    {
+        "id": 42,
+        "name": "Saarbrücken",
+        "lat": 49.2333,
+        "lng": 7
+    },
+    {
+        "id": 43,
+        "name": "Hamm",
+        "lat": 51.6833,
+        "lng": 7.8167
+    },
+    {
+        "id": 44,
+        "name": "Ludwigshafen",
+        "lat": 49.4811,
+        "lng": 8.4353
+    },
+    {
+        "id": 45,
+        "name": "Mülheim",
+        "lat": 51.4275,
+        "lng": 6.8825
+    },
+    {
+        "id": 46,
+        "name": "Oldenburg",
+        "lat": 53.1439,
+        "lng": 8.2139
+    },
+    {
+        "id": 47,
+        "name": "Osnabrück",
+        "lat": 52.2833,
+        "lng": 8.05
+    },
+    {
+        "id": 48,
+        "name": "Leverkusen",
+        "lat": 51.0333,
+        "lng": 6.9833
+    },
+    {
+        "id": 49,
+        "name": "Darmstadt",
+        "lat": 49.8722,
+        "lng": 8.6528
+    },
+    {
+        "id": 50,
+        "name": "Solingen",
+        "lat": 51.1667,
+        "lng": 7.0833
+    },
+    {
+        "id": 51,
+        "name": "Heidelberg",
+        "lat": 49.4167,
+        "lng": 8.7167
+    },
+    {
+        "id": 52,
+        "name": "Herne",
+        "lat": 51.55,
+        "lng": 7.2167
+    },
+    {
+        "id": 53,
+        "name": "Neuss",
+        "lat": 51.2,
+        "lng": 6.7
+    },
+    {
+        "id": 54,
+        "name": "Regensburg",
+        "lat": 49.0167,
+        "lng": 12.0833
+    },
+    {
+        "id": 55,
+        "name": "Paderborn",
+        "lat": 51.7181,
+        "lng": 8.7542
+    },
+    {
+        "id": 56,
+        "name": "Ingolstadt",
+        "lat": 48.7631,
+        "lng": 11.425
+    },
+    {
+        "id": 57,
+        "name": "Fürth",
+        "lat": 49.4667,
+        "lng": 11
+    },
+    {
+        "id": 58,
+        "name": "Würzburg",
+        "lat": 49.7833,
+        "lng": 9.9333
+    },
+    {
+        "id": 59,
+        "name": "Ulm",
+        "lat": 48.4,
+        "lng": 9.9833
+    },
+    {
+        "id": 60,
+        "name": "Heilbronn",
+        "lat": 49.15,
+        "lng": 9.2167
+    },
+    {
+        "id": 61,
+        "name": "Pforzheim",
+        "lat": 48.895,
+        "lng": 8.705
+    },
+    {
+        "id": 62,
+        "name": "Wolfsburg",
+        "lat": 52.4231,
+        "lng": 10.7872
+    },
+    {
+        "id": 63,
+        "name": "Göttingen",
+        "lat": 51.5339,
+        "lng": 9.9356
+    },
+    {
+        "id": 64,
+        "name": "Bottrop",
+        "lat": 51.5247,
+        "lng": 6.9228
+    },
+    {
+        "id": 65,
+        "name": "Reutlingen",
+        "lat": 48.4833,
+        "lng": 9.2167
+    },
+    {
+        "id": 66,
+        "name": "Koblenz",
+        "lat": 50.3597,
+        "lng": 7.5978
+    },
+    {
+        "id": 67,
+        "name": "Bremer_haven",
+        "lat": 53.55,
+        "lng": 8.5833
+    },
+    {
+        "id": 68,
+        "name": "Erlangen",
+        "lat": 49.5833,
+        "lng": 11.0167
+    },
+    {
+        "id": 69,
+        "name": "Recklinghausen",
+        "lat": 51.585,
+        "lng": 7.1619
+    },
+    {
+        "id": 70,
+        "name": "Bergisch Gladbach",
+        "lat": 50.9918,
+        "lng": 7.1303
+    },
+    {
+        "id": 71,
+        "name": "Remscheid",
+        "lat": 51.1833,
+        "lng": 7.2
+    },
+    {
+        "id": 72,
+        "name": "Jena",
+        "lat": 50.9272,
+        "lng": 11.5861
+    },
+    {
+        "id": 73,
+        "name": "Trier",
+        "lat": 49.7567,
+        "lng": 6.6414
+    },
+    {
+        "id": 74,
+        "name": "Salzgitter",
+        "lat": 52.15,
+        "lng": 10.3333
+    },
+    {
+        "id": 75,
+        "name": "Moers",
+        "lat": 51.4592,
+        "lng": 6.6197
+    },
+    {
+        "id": 76,
+        "name": "Siegen",
+        "lat": 50.8833,
+        "lng": 8.0167
+    },
+    {
+        "id": 77,
+        "name": "Hildesheim",
+        "lat": 52.15,
+        "lng": 9.95
+    },
+    {
+        "id": 78,
+        "name": "Gütersloh",
+        "lat": 51.9,
+        "lng": 8.3833
+    },
+    {
+        "id": 79,
+        "name": "Kaiserslautern",
+        "lat": 49.4447,
+        "lng": 7.7689
+    },
+    {
+        "id": 80,
+        "name": "Offenbach",
+        "lat": 50.1006,
+        "lng": 8.7665
+    }
+]
