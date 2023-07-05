@@ -7,4 +7,6 @@ if __name__ == '__main__':
     #print(temp)
     #for city_data in temp:
     #    print(city_data_service.get_average_rating(city_data, 2019))
-    city_data_service.test()
+    #city_data_service.test()
+    temp = city_data_service.get_location_statistics(52.1085288, 11.619955, 2013)
+    print(temp)
