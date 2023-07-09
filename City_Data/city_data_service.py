@@ -1,12 +1,12 @@
 import json
 
-with open('City_Data/city_ranking_data.json', 'r') as r:
+with open('city_ranking_data.json', 'r') as r:
     city_ranking_data_list = json.load(r)
 
-with open('City_Data/city_population_data.json', 'r') as p:
+with open('city_population_data.json', 'r') as p:
     city_population_data_list = json.load(p)
 
-with open('City_Data/city_base_data.json', 'r') as b:
+with open('city_base_data.json', 'r') as b:
     city_base_data_list = json.load(b)
 
 
@@ -17,7 +17,6 @@ def get_location_statistics(location_lat: float, location_lng: float, year: int)
     for city in city_list:
         statistic = _get_city_params(year, city)
         statistic["portion"] = city["portion"]
-        print(statistic["portion"])
         statistic_list.append(statistic)
     avr_rating = 0
     avr_acc_population = 0
@@ -29,10 +28,11 @@ def get_location_statistics(location_lat: float, location_lng: float, year: int)
         avr_population_change_last_year += statistic["population_change_last_year"] * statistic["portion"]
         avr_persons_per_km2 += statistic["persons_per_km2"] * statistic["portion"]
     return {
-        "avr_rating": avr_rating,
-        "avr_acc_population": avr_acc_population,
-        "avr_population_change_last_year": avr_population_change_last_year,
-        "avr_persons_per_km2": avr_persons_per_km2
+        "city_avr_rating": round(avr_rating, 2),
+        "city_avr_acc_population_change": round(avr_acc_population, 2),
+        "city_avr_population_change_last_year": round(avr_population_change_last_year, 2),
+        "city_avr_persons_per_km2": round(avr_persons_per_km2, 2),
+        "closest_city_distance": round(city_list[0]["distance"], 2)
     }
 
 
@@ -119,10 +119,6 @@ def _get_persons_per_km2(population, year):
     return round(population[str(statistic_years[idx])] / population["area"])
 
 
-def get_nearest_city(location_lat, location_lng):
-    return get_nearest_cities(1, location_lat, location_lng)
-
-
 def get_nearest_cities(num_cities: int, location_lat: float, location_lng: float):
     nearest_city_list = list()
     for city_data in city_base_data_list:
@@ -138,7 +134,7 @@ def _add_if_nearer(num_cities, nearest_city_list, new_city):
     if len(data_list) == 0:
         data_list.append(new_city)
         return data_list
-    if new_city["distance"] < data_list[-1]["distance"]:
+    if new_city["distance"] < data_list[-1]["distance"] or len(data_list) < num_cities:
         if len(data_list) >= num_cities:
             data_list.pop(-1)
         run = 0
