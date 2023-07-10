@@ -293,11 +293,11 @@ def _get_average_rent(data_list):
     return sum / len(data_list)
 
 def main():
-    input_data = 'C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\City_Data\\training_data_2.json'
-    input_data_1 = 'C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\Historical_Data\\trainingData_fut_2022.json'
-    input_data_2 = 'C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\Historical_Data\\trainingData_fut_2023.json'
-    input_data_3 = 'C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\Historical_Data\\trainingData_fut_2024.json'
-    input_data_4 = 'C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\Historical_Data\\trainingData_fut_2025.json'
+    input_data = 'training_data_2.json'
+    input_data_1 = '../Historical_Data/trainingData_fut_2022.json'
+    input_data_2 = '../Historical_Data/trainingData_fut_2023.json'
+    input_data_3 = '../Historical_Data/trainingData_fut_2024.json'
+    input_data_4 = '../Historical_Data/trainingData_fut_2025.json'
 
     spark = SparkSession.builder.getOrCreate()
     # Trainieren des Model
@@ -314,7 +314,7 @@ def main():
 
     print("average: " + str(_get_average_rent(test_data)))
 
-    with open('C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\Historical_Data\\trainingData_fut_2022_regression_res.json', 'w', encoding='utf-8') as file_1:
+    with open('../Historical_Data/trainingData_fut_2022_regression_res.json', 'w', encoding='utf-8') as file_1:
         json.dump(test_data, file_1, ensure_ascii=False, indent=2)
 
 
@@ -330,7 +330,7 @@ def main():
     print("average: " + str(_get_average_rent(test_data)))
 
     with open(
-            'C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\Historical_Data\\trainingData_fut_2023_regression_res.json',
+            '../Historical_Data/trainingData_fut_2023_regression_res.json',
             'w', encoding='utf-8') as file_1:
         json.dump(test_data, file_1, ensure_ascii=False, indent=2)
 
@@ -347,7 +347,7 @@ def main():
     print("average: " + str(_get_average_rent(test_data)))
 
     with open(
-            'C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\Historical_Data\\trainingData_fut_2024_regression_res.json',
+            '../Historical_Data/trainingData_fut_2024_regression_res.json',
             'w', encoding='utf-8') as file_1:
         json.dump(test_data, file_1, ensure_ascii=False, indent=2)
 
@@ -364,7 +364,7 @@ def main():
     print("average: " + str(_get_average_rent(test_data)))
 
     with open(
-            'C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\Historical_Data\\trainingData_fut_2025_regression_res.json',
+            '../Historical_Data/trainingData_fut_2025_regression_res.json',
             'w', encoding='utf-8') as file_1:
         json.dump(test_data, file_1, ensure_ascii=False, indent=2)
     print(regression.coefficients)
