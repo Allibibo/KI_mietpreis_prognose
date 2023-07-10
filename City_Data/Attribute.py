@@ -91,6 +91,23 @@ def pop_Attribute(loaded_data, attributeList):
             eintrag.pop(attribute, None)
     return loaded_data
 
+def generate_features(data):
+    loaded_data = data.copy()
+    loaded_data = handle_special_chars_in_data(loaded_data)
+
+    # Umwandeln der Attribute
+    loaded_data = splitdata(loaded_data,
+                            ['houseType', 'bundesland'])  # , 'stadt', 'livingSpace', 'houseType', 'bundesland'
+    loaded_data = handle_datasplit(loaded_data)
+
+    for data in loaded_data:
+        data.update(city_data_service.get_location_statistics(data["Latitude"], data["Longitude"], data["year"] + 2000))
+
+    # Entfernen von Attributen
+    loaded_data = pop_Attribute(loaded_data,
+                                ['stadtteil', 'plz', 'strasse', 'address', 'stadt', 'Latitude', 'Longitude'])
+
+    return loaded_data
 
 def main():
     input_filename_1 = '../Historical_Data/trainingData_located2010_2.json'
@@ -133,8 +150,7 @@ def main():
         data.update(city_data_service.get_location_statistics(data["Latitude"], data["Longitude"], data["year"] + 2000))
 
     # Entfernen von Attributen
-    loaded_data = pop_Attribute(loaded_data,
-                                ['stadtteil', 'plz', 'strasse', 'address', 'stadt', 'Latitude', 'Longitude'])
+    loaded_data = pop_Attribute(loaded_data, ['stadtteil', 'plz', 'strasse', 'address', 'stadt', 'Latitude', 'Longitude'])
 
     # Speichern der endgültigen Daten in eine JSON-Datei
     print("Udpated: " + str(len(loaded_data)))
