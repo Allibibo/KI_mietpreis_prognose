@@ -56,7 +56,7 @@ def _train_deep_neural_network(model_name, full_data):
 
     model.compile(optimizer=Adam(learning_rate=0.001), loss='mse', metrics=['mae'])
 
-    model.fit(X_train, y_train, epochs=20, batch_size=512, validation_data=(X_test, y_test), callbacks=[tf.keras.callbacks.EarlyStopping(patience=5)])
+    model.fit(X_train, y_train, epochs=1000, batch_size=512, validation_data=(X_test, y_test))
 
     model.summary()
 
@@ -164,8 +164,8 @@ def prepare_data_for_lstm(data):
 
 if __name__ == '__main__':
 
-    with open('test_data_2.json', 'r') as r:
+    with open('C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\City_Data\\training_data_2.json', 'r') as r:
         full_data = json.load(r)
-    _train_deep_neural_network("Model/m1", full_data)
+    _train_deep_neural_network("C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\City_Data\\Model\\m3", full_data)
 
     #_train_LSTM_model("Model/m2", full_data)
