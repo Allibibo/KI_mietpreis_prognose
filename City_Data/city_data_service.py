@@ -85,7 +85,8 @@ def _get_city_params(year, city):
 
 def _get_accumulated_population_changes(population, year):
     statistic_years = [1939, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2011, 2012,
-                       2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+                       2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022,
+                       2023, 2024, 2025]
     acc_percent_changes = 0
     fst = 0
     snd = 1
@@ -101,7 +102,8 @@ def _get_accumulated_population_changes(population, year):
 
 def _get_population_changes_last_year(population, year):
     statistic_years = [1939, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2011, 2012,
-                       2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+                       2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022,
+                       2023, 2024, 2025]
     idx = 0
     while idx < len(statistic_years) and statistic_years[idx] != year:
         idx += 1
@@ -112,7 +114,8 @@ def _get_population_changes_last_year(population, year):
 
 def _get_persons_per_km2(population, year):
     statistic_years = [1939, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2011, 2012,
-                       2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+                       2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022,
+                       2023, 2024, 2025]
     idx = 0
     while idx < len(statistic_years) and not statistic_years[idx] == year:
         idx += 1
@@ -167,6 +170,18 @@ def get_average_rating(ranking_data, year):
         run_year += 1
     return round(rating_sum / num_of_rating)
 
+
+def fill_up_to_2025(population_data):
+    res = list()
+    for data in population_data:
+        d21 = data["2021"]
+        d22 = data["2022"]
+        diff = d22 - d21
+        data["2023"] = d22 + (diff * 1)
+        data["2024"] = d22 + (diff * 2)
+        data["2025"] = d22 + (diff * 3)
+        res.append(data.copy())
+    return res
 
 def test():
     res = list()

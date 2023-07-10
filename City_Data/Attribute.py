@@ -91,6 +91,23 @@ def pop_Attribute(loaded_data, attributeList):
             eintrag.pop(attribute, None)
     return loaded_data
 
+def generate_features(data):
+    loaded_data = data.copy()
+    loaded_data = handle_special_chars_in_data(loaded_data)
+
+    # Umwandeln der Attribute
+    loaded_data = splitdata(loaded_data,
+                            ['houseType', 'bundesland'])  # , 'stadt', 'livingSpace', 'houseType', 'bundesland'
+    loaded_data = handle_datasplit(loaded_data)
+
+    for data in loaded_data:
+        data.update(city_data_service.get_location_statistics(data["Latitude"], data["Longitude"], data["year"] + 2000))
+
+    # Entfernen von Attributen
+    loaded_data = pop_Attribute(loaded_data,
+                                ['stadtteil', 'plz', 'strasse', 'address', 'stadt', 'Latitude', 'Longitude'])
+
+    return loaded_data
 
 def main():
     input_filename_1 = '../Historical_Data/trainingData_located2010_2.json'
@@ -133,8 +150,7 @@ def main():
         data.update(city_data_service.get_location_statistics(data["Latitude"], data["Longitude"], data["year"] + 2000))
 
     # Entfernen von Attributen
-    loaded_data = pop_Attribute(loaded_data,
-                                ['stadtteil', 'plz', 'strasse', 'address', 'stadt', 'Latitude', 'Longitude'])
+    loaded_data = pop_Attribute(loaded_data, ['stadtteil', 'plz', 'strasse', 'address', 'stadt', 'Latitude', 'Longitude'])
 
     # Speichern der endgültigen Daten in eine JSON-Datei
     print("Udpated: " + str(len(loaded_data)))
@@ -142,8 +158,8 @@ def main():
 
 
 def main_2():
-    input_filename = 'final_data_2_timeline.json'
-    output_filename = "final_data_3d.json"
+    input_filename = 'final_data_2_timeline_fut.json'
+    output_filename = "final_data_3d_fut.json"
 
     # Lade die Daten ein
     loaded_data = load_data(input_filename)
@@ -170,7 +186,8 @@ def main_2():
         res_list.append(list())
 
     for data in loaded_data:
-        id = data.pop("id")
+        #id = data.pop("id")
+        id = data["id"]
         res_list[id - 1].append(data)
 
     run = 0
@@ -228,7 +245,11 @@ def _build_raw_data_2():
     input_filename_10 = '../Historical_Data/trainingData_located2019_2.json'
     input_filename_11 = '../Historical_Data/trainingData_located2020_2.json'
     input_filename_12 = '../Historical_Data/trainingData_located2021_2.json'
-    output_filename = "final_data_2_timeline.json"
+    input_filename_13 = '../Historical_Data/trainingData_fut_2022.json'
+    input_filename_14 = '../Historical_Data/trainingData_fut_2023.json'
+    input_filename_15 = '../Historical_Data/trainingData_fut_2024.json'
+    input_filename_16 = '../Historical_Data/trainingData_fut_2025.json'
+    output_filename = "final_data_2_timeline_fut.json"
 
     # Lade die Daten ein
     loaded_data_1 = handle_special_chars_in_data(load_data(input_filename_1))
@@ -243,12 +264,17 @@ def _build_raw_data_2():
     loaded_data_10 = handle_special_chars_in_data(load_data(input_filename_10))
     loaded_data_11 = handle_special_chars_in_data(load_data(input_filename_11))
     loaded_data_12 = handle_special_chars_in_data(load_data(input_filename_12))
+    loaded_data_13 = handle_special_chars_in_data(load_data(input_filename_13))
+    loaded_data_14 = handle_special_chars_in_data(load_data(input_filename_14))
+    loaded_data_15 = handle_special_chars_in_data(load_data(input_filename_15))
+    loaded_data_16 = handle_special_chars_in_data(load_data(input_filename_16))
 
     highest_id = 0
     data_list = list()
     while len(loaded_data_2) > 0 or len(loaded_data_3) > 0 or len(loaded_data_4) > 0 or len(loaded_data_5) > 0 \
             or len(loaded_data_6) > 0 or len(loaded_data_7) > 0 or len(loaded_data_8) > 0 or len(loaded_data_9) > 0 \
-            or len(loaded_data_10) > 0 or len(loaded_data_11) > 0 or len(loaded_data_12) > 0:
+            or len(loaded_data_10) > 0 or len(loaded_data_11) > 0 or len(loaded_data_12) > 0 or len(loaded_data_13) > 0 \
+            or len(loaded_data_14) > 0 or len(loaded_data_15) > 0 or len(loaded_data_16) > 0:
         print(len(loaded_data_2))
         if len(loaded_data_2) > 0:
             data_2 = loaded_data_2.pop(0)
@@ -294,6 +320,22 @@ def _build_raw_data_2():
             data_12 = loaded_data_12.pop(0)
         else:
             data_12 = None
+        if len(loaded_data_13) > 0:
+            data_13 = loaded_data_13.pop(0)
+        else:
+            data_13 = None
+        if len(loaded_data_14) > 0:
+            data_14 = loaded_data_14.pop(0)
+        else:
+            data_14 = None
+        if len(loaded_data_15) > 0:
+            data_15 = loaded_data_15.pop(0)
+        else:
+            data_15 = None
+        if len(loaded_data_16) > 0:
+            data_16 = loaded_data_16.pop(0)
+        else:
+            data_16 = None
 
         run = 0
         while run < len(loaded_data_1) and (data_2 is not None or data_3 is not None or data_4 is not None \
@@ -432,6 +474,54 @@ def _build_raw_data_2():
                     data_12["id"] = highest_id
                 data_list.append(data_12)
                 data_12 = None
+            if data_13 is not None and data_1["Latitude"] == data_13["Latitude"] \
+                    and data_1["Longitude"] == data_13["Longitude"] and data_1["livingSpace"] == data_13["livingSpace"] \
+                    and data_1["roomCount"] == data_13["roomCount"] and data_1["propertyAge"] == data_13["propertyAge"] \
+                    and data_1["houseType"] == data_13["houseType"]:
+                if "id" in data_1:
+                    data_13["id"] = data_1["id"]
+                else:
+                    highest_id += 1
+                    data_1["id"] = highest_id
+                    data_13["id"] = highest_id
+                data_list.append(data_13)
+                data_13 = None
+            if data_14 is not None and data_1["Latitude"] == data_14["Latitude"] \
+                    and data_1["Longitude"] == data_14["Longitude"] and data_1["livingSpace"] == data_14["livingSpace"] \
+                    and data_1["roomCount"] == data_14["roomCount"] and data_1["propertyAge"] == data_14["propertyAge"] \
+                    and data_1["houseType"] == data_14["houseType"]:
+                if "id" in data_1:
+                    data_14["id"] = data_1["id"]
+                else:
+                    highest_id += 1
+                    data_1["id"] = highest_id
+                    data_14["id"] = highest_id
+                data_list.append(data_14)
+                data_14 = None
+            if data_15 is not None and data_1["Latitude"] == data_15["Latitude"] \
+                    and data_1["Longitude"] == data_15["Longitude"] and data_1["livingSpace"] == data_15["livingSpace"] \
+                    and data_1["roomCount"] == data_15["roomCount"] and data_1["propertyAge"] == data_15["propertyAge"] \
+                    and data_1["houseType"] == data_15["houseType"]:
+                if "id" in data_1:
+                    data_15["id"] = data_1["id"]
+                else:
+                    highest_id += 1
+                    data_1["id"] = highest_id
+                    data_15["id"] = highest_id
+                data_list.append(data_15)
+                data_15 = None
+            if data_16 is not None and data_1["Latitude"] == data_16["Latitude"] \
+                    and data_1["Longitude"] == data_16["Longitude"] and data_1["livingSpace"] == data_16["livingSpace"] \
+                    and data_1["roomCount"] == data_16["roomCount"] and data_1["propertyAge"] == data_16["propertyAge"] \
+                    and data_1["houseType"] == data_16["houseType"]:
+                if "id" in data_1:
+                    data_16["id"] = data_1["id"]
+                else:
+                    highest_id += 1
+                    data_1["id"] = highest_id
+                    data_16["id"] = highest_id
+                data_list.append(data_16)
+                data_16 = None
             run += 1
     data_list.extend(loaded_data_1)
     save_to_json(data_list, output_filename)
@@ -458,21 +548,48 @@ def remove_double(data_list):
     return result_list
 
 
+def create_future_data(data):
+    data_list_2022 = list()
+    data_list_2023 = list()
+    data_list_2024 = list()
+    data_list_2025 = list()
+
+    for d in data:
+        d.pop("rent")
+        d["year"] = 22
+        data_list_2022.append(d.copy())
+        d["year"] = 23
+        data_list_2023.append(d.copy())
+        d["year"] = 24
+        data_list_2024.append(d.copy())
+        d["year"] = 25
+        data_list_2025.append(d.copy())
+
+    save_to_json(data_list_2022, '../Historical_Data/trainingData_fut_2022.json')
+    save_to_json(data_list_2023, '../Historical_Data/trainingData_fut_2023.json')
+    save_to_json(data_list_2024, '../Historical_Data/trainingData_fut_2024.json')
+    save_to_json(data_list_2025, '../Historical_Data/trainingData_fut_2025.json')
+
+
 if __name__ == "__main__":
     # Erstelle Trainingsvariablen aus Daten
     # main()
 
     main_2()
 
+# Erstellen der Zukünftigen Rohdaten
+    #data = load_data('../Historical_Data/trainingData_located2021_2.json')
+    #create_future_data(data)
+
 # Gleiche Immobilenstammdaten aus den verschiedenen Jahren werden mit der salben ID versehen um sie
 # folgend und eine 3d Liste zusammenführen zu können.
-# _build_raw_data_2()
-# data = load_data('final_data_2_timeline.json')
-# i = 0
-# for d in data:
-#    if not 'id' in d:
-#        i += 1
-# print("No ID: " + str(i))
+#     _build_raw_data_2()
+#     data = load_data('final_data_2_timeline.json')
+#     i = 0
+#     for d in data:
+#        if not 'id' in d:
+#            i += 1
+#     print("No ID: " + str(i))
 
 # num_list = list()
 # for i in range(0, 117360):
