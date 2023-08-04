@@ -7,6 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from tensorflow import keras
 from sklearn.model_selection import train_test_split
 from tensorflow.keras import regularizers
+import matplotlib.pyplot as plt
 
 
 def _train_deep_neural_network(model_name, full_data):
@@ -41,11 +42,12 @@ def _train_deep_neural_network(model_name, full_data):
     X_test = scaler.transform(X_test)
 
     # Definition der Hyperparameter
-    input_param_count = len(full_data[0]) -1
+    input_param_count = len(full_data[0]) - 1
 
     # Erstellung des Modells
     model = tf.keras.models.Sequential([
-        tf.keras.layers.Dense(512, activation='relu', input_shape=(input_param_count,), kernel_regularizer=regularizers.l2(0.001)),
+        tf.keras.layers.Dense(512, activation='relu', input_shape=(input_param_count,),
+                              kernel_regularizer=regularizers.l2(0.001)),
         tf.keras.layers.Dense(512, activation='relu'),
         tf.keras.layers.Dense(512, activation='relu'),
         tf.keras.layers.Dense(512, activation='relu'),
@@ -56,7 +58,10 @@ def _train_deep_neural_network(model_name, full_data):
 
     model.compile(optimizer=Adam(learning_rate=0.001), loss='mse', metrics=['mae'])
 
-    model.fit(X_train, y_train, epochs=1000, batch_size=512, validation_data=(X_test, y_test))
+    res = model.fit(X_train, y_train, epochs=20, batch_size=512, validation_data=(X_test, y_test))
+    plot_history(res)
+    plot_loss(res)
+    plot_accuracy(res)
 
     model.summary()
 
@@ -67,12 +72,67 @@ def _train_deep_neural_network(model_name, full_data):
     model.save(model_name)
 
 
-def _train_LSTM_model(model_name, full_data):
+def plot_history(history):
+    # Verlustkurven plotten
+    plt.subplot(1, 2, 1)
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('Modellverlust')
+    plt.ylabel('Verlust')
+    plt.xlabel('Epoche')
+    plt.legend(['Training', 'Validierung'], loc='upper right')
 
+    # Genauigkeitskurven plotten
+    plt.subplot(1, 2, 2)
+    plt.plot(history.history['mae'])
+    plt.plot(history.history['val_mae'])
+    plt.title('Modell-MAE')
+    plt.ylabel('MAE')
+    plt.xlabel('Epoche')
+    plt.legend(['Training', 'Validierung'], loc='lower right')
+
+    # Diagramm anzeigen
+    plt.show()
+
+
+def plot_loss(history):
+    train_loss = history.history['loss']
+    val_loss = history.history['val_loss']
+    epochs = range(1, len(train_loss) + 1)
+
+    plt.plot(epochs, train_loss, 'b-', label='Training Loss')
+    plt.plot(epochs, val_loss, 'r-', label='Validation Loss')
+    plt.title('Training and Validation Loss')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.show()
+
+def plot_accuracy(history):
+    plt.plot(history.history['mae'])
+    plt.plot(history.history['val_mae'])
+    epochs = range(1, len(train_acc) + 1)
+
+    plt.plot(epochs, train_acc, 'b-', label='Training Accuracy')
+    plt.plot(epochs, val_acc, 'r-', label='Validation Accuracy')
+    plt.title('Training and Validation Accuracy')
+    plt.xlabel('Epochs')
+    plt.ylabel('Accuracy')
+    plt.legend()
+    plt.show()
+
+
+def evaluate_model(model, X_test, y_test):
+    # Modell auf Testdaten evaluieren
+    loss, accuracy = model.evaluate(X_test, y_test)
+    print("Testverlust:", loss)
+    print("Testgenauigkeit:", accuracy)
+
+
+def _train_LSTM_model(model_name, full_data):
     features, labels = prepare_data_for_lstm(full_data)
 
     X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.2, random_state=42)
-
 
     # Definition der Hyperparameter
     num_units = 64  # Anzahl der Einheiten (Neuronen) pro Schicht
@@ -162,10 +222,10 @@ def prepare_data_for_lstm(data):
 
     return np.array(X), np.array(y)
 
+
 if __name__ == '__main__':
-
-    with open('C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\City_Data\\training_data_2.json', 'r') as r:
+    with open('training_data_2.json', 'r') as r:
         full_data = json.load(r)
-    _train_deep_neural_network("C:\\Users\\alexa\\OneDrive\\Projects\\Python\\KI\\City_Data\\Model\\m3", full_data)
+    _train_deep_neural_network("Model/m4", full_data)
 
-    #_train_LSTM_model("Model/m2", full_data)
+    # _train_LSTM_model("Model/m2", full_data)

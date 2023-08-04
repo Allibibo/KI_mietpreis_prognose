@@ -149,11 +149,66 @@ def _get_average_rent(data_list):
         sum += data["rent"]
     return sum / len(data_list)
 
+def _calculate_future_data(data_prev, data):
+    res_2022 = list()
+    res_2023 = list()
+    res_2024 = list()
+    res_2025 = list()
+
+    r = 0
+    for d in data:
+        print(r)
+        equal_prev = None
+        for prev in data_prev:
+            if d["Latitude"] == prev["Latitude"] and d["Longitude"] == prev["Longitude"] \
+                    and d["livingSpace"] == prev["livingSpace"] \
+                    and d["roomCount"] == prev["roomCount"] \
+                    and d["propertyAge"] == prev["propertyAge"] \
+                    and d["houseType"] == prev["houseType"]:
+                equal_prev = prev
+                break
+        dif = d["rent"] - equal_prev["rent"]
+        start_rent = d["rent"]
+        d["year"] = 22
+        d["rent"] = start_rent + (dif * 1)
+        res_2022.append(d.copy())
+        d["year"] = 23
+        d["rent"] = start_rent + (dif * 2)
+        res_2023.append(d.copy())
+        d["year"] = 24
+        d["rent"] = start_rent + (dif * 3)
+        res_2024.append(d.copy())
+        d["year"] = 25
+        d["rent"] = start_rent + (dif * 4)
+        res_2025.append(d.copy())
+
+        r += 1
+
+    print(_get_average_rent(res_2022))
+    print(_get_average_rent(res_2023))
+    print(_get_average_rent(res_2024))
+    print(_get_average_rent(res_2025))
+
+    with open('../Historical_Data/trainingData_fut_2022_calc_res.json', 'w', encoding='utf-8') as file_1:
+        json.dump(res_2022, file_1, ensure_ascii=False, indent=2)
+
+    with open('../Historical_Data/trainingData_fut_2023_calc_res.json', 'w', encoding='utf-8') as file_1:
+        json.dump(res_2023, file_1, ensure_ascii=False, indent=2)
+
+    with open('../Historical_Data/trainingData_fut_2024_calc_res.json', 'w', encoding='utf-8') as file_1:
+        json.dump(res_2024, file_1, ensure_ascii=False, indent=2)
+
+    with open('../Historical_Data/trainingData_fut_2025_calc_res.json', 'w', encoding='utf-8') as file_1:
+        json.dump(res_2025, file_1, ensure_ascii=False, indent=2)
 
 if __name__ == '__main__':
-    with open('../Historical_Data/trainingData_fut_2022.json', 'r', encoding='utf-8') as file:
+    with open('../Historical_Data/trainingData_located2021_2.json', 'r', encoding='utf-8') as file:
         data_list = json.load(file)
 
+    with open('../Historical_Data/trainingData_located2020_2.json', 'r', encoding='utf-8') as file:
+        prev_data = json.load(file)
+
+    _calculate_future_data(prev_data, data_list)
 # Für die Vorhersage mit dem RNN
     # predictions = _generate_results(data_list)
     # run = 0
@@ -161,8 +216,10 @@ if __name__ == '__main__':
     #     data["rent"] = int(predictions[run][0])
     #     run += 1
 
-    data_list = _generate_results_LSTM(data_list)
-    print("average: " + str(_get_average_rent(data_list)))
+
+
+    # data_list = _generate_results_LSTM(data_list)
+    # print("average: " + str(_get_average_rent(data_list)))
 
     # with open('../Historical_Data/trainingData_fut_2025_RNN_res.json', 'w', encoding='utf-8') as file_1:
     #     json.dump(data_list, file_1, ensure_ascii=False, indent=2)
